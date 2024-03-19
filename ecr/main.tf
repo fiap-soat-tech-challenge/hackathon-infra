@@ -38,14 +38,14 @@ resource "aws_ecr_lifecycle_policy" "lifecycle_point_management" {
  policy = jsonencode({
    rules = [{
      rulePriority = 1
-     description  = "last 5 docker images"
+     description  = "last 2 docker images"
      action = {
        type = "expire"
      }
      selection = {
        tagStatus   = "any"
        countType   = "imageCountMoreThan"
-       countNumber = 5
+       countNumber = 2
      }
    }]
  })
