@@ -13,29 +13,20 @@ resource "aws_security_group" "docdb" {
   description = "SG for DocumentDB"
   vpc_id      = aws_vpc.vpc.id
 
-  ingress = [{
-    cidr_blocks = [ "187.19.185.104/32" ]
-    description = "Acesso DocumentDB local"
-    from_port = 27017
-    ipv6_cidr_blocks = []
-    prefix_list_ids = []
-    protocol = "tcp"
+  ingress {
+    protocol        = "tcp"
+    from_port       = 27017
+    to_port         = 27017
     security_groups = [aws_security_group.ecs.id]
-    self = false
-    to_port = 27017
-  }]
+  }
 
-  egress = [{
-    cidr_blocks = [ "0.0.0.0/0" ]
+  egress {
     description = "DocumentDB acesso externo"
-    from_port = 0
-    ipv6_cidr_blocks = []
-    prefix_list_ids = []
-    protocol = "-1"
-    security_groups = []
-    self = false
-    to_port = 0
-  }] 
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_docdb_cluster_parameter_group" "parameter_group" {
@@ -60,7 +51,6 @@ resource "aws_docdb_cluster" "docdb" {
   db_subnet_group_name    = aws_db_subnet_group.docdb.name
   vpc_security_group_ids  = [aws_security_group.docdb.id]
   db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.parameter_group.name
-  
 }
 
 resource "aws_docdb_cluster_instance" "docdb_instances" {
