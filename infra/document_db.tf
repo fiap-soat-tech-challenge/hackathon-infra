@@ -20,6 +20,7 @@ resource "aws_security_group" "docdb" {
     ipv6_cidr_blocks = []
     prefix_list_ids = []
     protocol = "tcp"
+    security_groups = [aws_security_group.ecs.id]
     self = false
     to_port = 27017
   }]
@@ -39,7 +40,7 @@ resource "aws_security_group" "docdb" {
 
 resource "aws_docdb_cluster_parameter_group" "docdb_parameter_group" {
   family      = "docdb3.6"
-  name        = "docdb-point-management_parameter_group"
+  name        = "docdb-point-management-pg"
 
   parameter {
     name  = "tls"
