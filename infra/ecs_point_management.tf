@@ -24,7 +24,6 @@ resource "aws_ecs_task_definition" "point_management" {
         { "name": "DB_PASSWORD", "value": "${var.docdb_password}" },
         { "name": "DB_NAME", "value": "${var.db_name_point_management}" },
         { "name": "DB_SYNCHRONIZE", "value": "true" },
-        { "name": "DB_SSL", "value": "true" },
         { "name": "NO_COLOR", "value": "true" },
       ]
       healthCheck = {
