@@ -38,14 +38,13 @@ resource "aws_security_group" "docdb" {
   }] 
 }
 
-resource "aws_docdb_cluster_parameter_group" "docdb_parameter_group" {
-  family      = "docdb3.6"
+resource "aws_docdb_cluster_parameter_group" "parameter_group" {
+  family      = "docdb5.0"
   name        = "docdb-point-management-pg"
 
   parameter {
     name  = "tls"
     value = "disabled"
-    apply_method = "immediate"
   }
 }
 
@@ -60,7 +59,7 @@ resource "aws_docdb_cluster" "docdb" {
   availability_zones      = var.availability_zones
   db_subnet_group_name    = aws_db_subnet_group.docdb.name
   vpc_security_group_ids  = [aws_security_group.docdb.id]
-  db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.docdb_parameter_group.name
+  db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.parameter_group.name
   
 }
 
