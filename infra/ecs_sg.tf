@@ -1,4 +1,3 @@
-
 resource "aws_security_group" "ecs" {
   name        = "${var.cluster_name}-ecs-task-sg"
   description = "Security Group for ECS Task"
