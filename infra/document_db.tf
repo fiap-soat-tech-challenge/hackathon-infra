@@ -38,14 +38,13 @@ resource "aws_security_group" "docdb" {
   }] 
 }
 
-resource "aws_docdb_cluster_parameter_group" "docdb_parameter_group" {
-  family      = "docdb3.6"
+resource "aws_docdb_cluster_parameter_group" "parameter_group" {
+  family      = "docdb5.0"
   name        = "docdb-point-management-pg"
 
   parameter {
     name  = "tls"
     value = "disabled"
-    apply_method = "immediate"
   }
 }
 
