@@ -18,7 +18,10 @@ resource "aws_ecs_task_definition" "point_management" {
       ]
       environment = [
         { "name": "NODE_ENV", "value": "production" },
-        { "name": "DB_URL", "value": "${var.cosmos_mongodb_url}" },
+        { "name": "DB_HOST", "value": "${element(split(":", aws_docdb_cluster.docdb.endpoint), 0)}" },
+        { "name": "DB_PORT", "value": "27017" },
+        { "name": "DB_USER", "value": "${var.docdb_username}" }, 
+        { "name": "DB_PASSWORD", "value": "${var.docdb_password}" },
         { "name": "DB_NAME", "value": "${var.db_name_point_management}" },
         { "name": "DB_SYNCHRONIZE", "value": "true" },
         { "name": "DB_SSL", "value": "true" },

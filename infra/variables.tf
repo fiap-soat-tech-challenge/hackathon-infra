@@ -96,6 +96,20 @@ variable "cosmos_mongodb_url" {
 /*==== End MongoDB variables ======*/
 
 
+/*==== DocumentDB variables ======*/
+variable "docdb_username" {
+  type = string
+  sensitive = true
+}
+
+variable "docdb_password" {
+  type = string
+  sensitive = true
+}
+/*==== End DocumentDB variables ======*/
+
+
+
 variable "iam_policy_arn" {
   type = list
   default = [
