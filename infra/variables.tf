@@ -109,6 +109,26 @@ variable "docdb_password" {
 /*==== End DocumentDB variables ======*/
 
 
+/*==== Mail variables ======*/
+variable "mail_user" {
+  type = string
+  sensitive = true
+}
+
+variable "mail_pass" {
+  type = string
+  sensitive = true
+}
+/*==== End Mail variables ======*/
+
+
+/*==== JWT variables ======*/
+variable "jwt_secret" {
+  type = string
+  sensitive = true
+}
+/*==== End JWT variables ======*/
+
 
 variable "iam_policy_arn" {
   type = list

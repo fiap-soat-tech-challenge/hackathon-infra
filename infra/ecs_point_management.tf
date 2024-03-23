@@ -25,6 +25,11 @@ resource "aws_ecs_task_definition" "point_management" {
         { "name": "DB_NAME", "value": "${var.db_name_point_management}" },
         { "name": "DB_SYNCHRONIZE", "value": "true" },
         { "name": "NO_COLOR", "value": "true" },
+        { "name": "MAIL_HOST", "value": "sandbox.smtp.mailtrap.io" },
+        { "name": "MAIL_PORT", "value": "2525" },
+        { "name": "MAIL_USER", "value": "${var.mail_user}" },
+        { "name": "MAIL_PASS", "value": "${var.mail_pass}" },
+        { "name": "JWT_SECRET", "value": "${var.jwt_secret}" },
       ]
       healthCheck = {
         command: ["CMD-SHELL", "curl http://localhost:3000/health || exit 1"],
